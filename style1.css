@@ -1,0 +1,41 @@
+body{
+	margin-left: 1rem;
+	overflow-x: hidden;
+	font-style: inherit;
+	line-height: 0.1px;
+}
+.container1{
+	background-image: url("images/supermarketphoto1.jpeg");
+	background-repeat: no-repeat;
+	background-position: relative;
+	background-size: cover;
+	padding-bottom: 20px;
+}
+#h1{
+	text-align: center;
+	font-style: italic;
+	font-family:sans-serif;
+	color: blue;
+}
+#h3{
+	text-align: center;
+}
+#home{
+	padding: 20px;
+
+}
+#Purchases{
+	padding: 20px;
+}
+#Sales{
+	padding: 20px;
+}
+#Debtors{
+	padding: 20px;
+}
+#Creditors{
+	padding: 20px;
+}
+#Products{
+	padding: 20px;
+}

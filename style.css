@@ -1,0 +1,94 @@
+body{
+	overflow-x: hidden;
+	margin-left: 0.1px;
+	margin-top: none;
+}
+.header{
+	background-color: #ccffcc;
+	text-align: center;
+	font-style: italic;
+	font-family: fantasy;
+	font-size: 0.3rem;
+}
+#centered1{
+		position: absolute;
+		font-size: 10vw;
+		top: 30%;
+		left: 38%;
+		transform: translate(-50%, -50%);
+	}
+	#centered2{
+		position: absolute;
+		font-size: 30vw;
+		top: 50%;
+		left: 25%;
+		transform: translate(-50%, -50%);
+	}
+	#centered3{
+		position: absolute;
+		font-size: 30px;
+		top: 70%;
+		left: 30%;
+		transform: translate(-50%, -50%);
+	}
+  #signup{
+  	width: 60%;
+  	border-radius: 30px;
+  }
+  #login{
+  	width: 60%;
+  	background-color: #fff;
+  	border: 1px solid #1da1f2;
+  	color: #1da1f2;
+  	border-radius: 30px;
+  }
+  #login:hover{
+  	width: 60%;
+  	background-color: #fff;
+  	border: 1px solid #1da1f2;
+  	color: #1da1f2;
+  	border-radius: 30px;
+  }
+  .well{
+  	background-color: #187Fae;
+  }
+  #end{
+  	text-align: center;
+  	text-decoration: underline;
+  	text-decoration-color:#ccffcc; 
+  	
+  }
+  .main-content{
+		width: 50%;
+		height: 40%;
+		margin: 10px auto;
+		background-color: #80ccff;
+		border: 2px solid #e6e6e6;
+		padding: 40px 50px; 
+	}
+	#signup{
+		width: 60%;
+		border-radius: 30px;
+	}
+	/*login css*/
+	.main-content1{
+		width: 50%;
+		height: 50%;
+		margin: 10px auto;
+		background-color:#80ccff;
+		border: 2px solid:#e6e6e6;
+		padding: 40px 50px;
+	}
+	.header1{
+		border:0px solid#000;
+		margin-bottom: 5px;
+
+	}
+	 #signin{
+	 	width: 100px;
+	 	border-radius: 30px;
+	 	align-self: center;
+	 	text-align: left;
+	 	margin-top: 10px;
+	 	background-color:#000; 
+	 }
