@@ -1,3 +1,15 @@
+<?php
+ session_start();
+if (!isset($_SESSION['x'])) {
+  echo "ACCESS DENIED PLEASE LOGIN ....";
+echo "<a href=login.php>Login</a>";
+  exit();
+}
+else{
+  $email = $_SESSION['x'];
+  //echo "<h3>LOGINED IN AS : $email<br>Welcome</h3>";
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +22,8 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+   <h3 style="color: green;"><center> Logined as <?php echo $email ?></center></h3>
+  <center><h3 style="color: green;"><?php echo "Time Logined" .  date('Y/m/d h:m:s'); ?></h3></center>
     <div class="header">
         <h1>JIRANI SUPERMARKET LIMITED <p id="demo"></p></h1>
       </div>

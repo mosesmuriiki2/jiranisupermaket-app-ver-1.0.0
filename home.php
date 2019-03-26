@@ -7,7 +7,7 @@ echo "<a href=login.php>Login</a>";
 }
 else{
   $email = $_SESSION['x'];
-  echo "<h3>LOGINED IN AS : $email<br>Welcome</h3>";
+  echo "<center><h3>LOGINED IN AS : $email<br>Welcome</h3></center>";
 }
 
 ?>
@@ -91,8 +91,8 @@ else{
 </div>
 
 </section>
-  <div class="panel panel-default">
-    <div class="panel-footer">Jirani supermarket limited &copy 2019</div>
+  <div class="panel panel-default" style="margin-top: 30px; width: 82%;">
+    <div class="panel-footer" style="text-align: center; color: rgb(3,130,29);">Jirani supermarket limited All Rights Reserved &copy 2019</div>
   </div>
 </div>
 </body>

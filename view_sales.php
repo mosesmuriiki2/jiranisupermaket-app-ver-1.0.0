@@ -1,5 +1,14 @@
 <?php 
 session_start();
+if (!isset($_SESSION['x'])) {
+  echo "ACCESS DENIED PLEASE LOGIN ....";
+echo "<a href=login.php>Login</a>";
+  exit();
+}
+else{
+  $email = $_SESSION['x'];
+ // echo "<center><h3>LOGINED IN AS : $email<br>Welcome</h3></center>";
+}
 $conn = mysqli_connect('localhost','root','','jirani_db');
  if (mysqli_connect_errno()) {
  	echo "Error occured". mysqli_connect_errno();
@@ -9,7 +18,7 @@ $conn = mysqli_connect('localhost','root','','jirani_db');
   
   $result= mysqli_query($conn, $query);
    $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
-   var_dump($fetch);
+  // var_dump($fetch);
 
  ?>
  <!DOCTYPE html>
@@ -23,7 +32,12 @@ $conn = mysqli_connect('localhost','root','','jirani_db');
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
  </head>
  <body>
+   <h3 style="color: green;"><center> Logined as <?php echo $email ?></center></h3>
+  <center><h3 style="color: green;"><?php echo "Time Logined" .  date('Y/m/d h:m:s'); ?></h3></center>
    <div class="container">
+    <h2>Search sales</h2>
+    <p>Enter keyword like money or dates</p>\
+    <input type="text" name="" class="form-control" id="myInput" placeholder="Search...">
    	<h1 style="text-align: center;">All Sales</h1>
    	<div class="table-responsive">
    		<table class="table" border="1" cellspacing="1" style="border-radius: unset;">
@@ -35,7 +49,7 @@ $conn = mysqli_connect('localhost','root','','jirani_db');
    				</tr>
    			</thead>
    			<?php foreach($fetch as $fetch): ?>
-   			<tbody>
+   			<tbody id="myTable">
    				<tr>
    					<td><?php echo $fetch['notes']; ?></td>
    					<td> <?php echo $fetch['coins']; ?> </td>
@@ -46,5 +60,15 @@ $conn = mysqli_connect('localhost','root','','jirani_db');
    		</table>
    	</div>
    </div>
+   <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
  </body>
  </html>

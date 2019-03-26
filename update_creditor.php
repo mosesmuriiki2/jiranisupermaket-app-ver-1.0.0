@@ -13,7 +13,7 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Creditors | jirani supermarket</title>
+  <title>Update Creditors | jirani supermarket</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -32,7 +32,7 @@ else{
     <div class="col-sm-12">
       <div class="main-content">
         <div class="header1">
-          <h3 style="text-align: center;"><strong>Add Purchases</strong></h3>
+          <h3 style="text-align: center;"><strong>Update Creditor</strong></h3>
         </div><!--end of title-->
         <div class="1-part">
           <form method="post" action="" style="align-self: center;">
@@ -61,7 +61,7 @@ else{
 
             </div>
             <br><br>
-                 <center><button id="signup" class="btn btn-success btn-lg" name="ok">Add Creditor</button></center>
+                 <center><button id="signup" class="btn btn-success btn-lg" name="ok">Update creditor</button></center>
           
           </form>
 <div class="footer" id="end">
@@ -108,11 +108,11 @@ if (empty($contact)) {
  $conn = mysqli_connect("localhost","root","","jirani_db");
 
 //insert to t--able users
- $res = mysqli_query($conn, "INSERT INTO creditors VALUES('$cred_name','$prod_pur','$total','$contact','$date')");
-
-if ($res==true) {
-  echo "<h4 style:'color:green;'> Successfully registred</h4>";
-  header('location: home.php');
+   $query = "UPDATE creditors SET prod_pur='$prod_pur', total='$total',contact='$contact', date='$date' WHERE cred_name={$cred_name} ";
+    $result= mysqli_query($conn, $query);
+if ($result==true) {
+  echo "<h4 style:'color:green;'> Successfully updated</h4>";
+  //header('location: home.php');
 }
 else{
   echo "error";

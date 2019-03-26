@@ -1,4 +1,15 @@
 <?php
+session_start();
+if (!isset($_SESSION['x'])) {
+  echo "ACCESS DENIED PLEASE LOGIN ....";
+echo "<a href=login.php>Login</a>";
+  exit();
+}
+else{
+  $email = $_SESSION['x'];
+ // echo "<center><h3>LOGINED IN AS : $email<br>Welcome</h3><center>";
+}
+
   $conn = mysqli_connect("localhost","root","", "jirani_db");
 
   if (mysqli_connect_errno()) {
@@ -10,7 +21,7 @@ $query = 'SELECT * FROM purchases';
 $result = mysqli_query($conn, $query);
 //fetch data
 $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
-var_dump($fetch)
+//var_dump($fetch)
 //free result
 
 //close connection
@@ -27,7 +38,12 @@ var_dump($fetch)
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+  <h3 style="color: green;"><center> Logined as <?php echo $email ?></center></h3>
+  <center><h3 style="color: green;"><?php echo "Time Logined" .  date('Y/m/d h:m:s'); ?></h3></center>
 	<div class="container">
+    <h2>Search Purchases</h2>
+    <p>Enter keywords to search</p>
+    <input type="text" name="" class="form-control" id="myInput" placeholder="Search...">
 <h1 style="text-align: center;">All purchases</h1>
    
       <div class="container">
@@ -47,7 +63,7 @@ var_dump($fetch)
       </tr>
       <?php foreach($fetch as $fetch) :  ?>
     </thead>
-    <tbody>
+    <tbody id="myTable">
       <tr>
         <td> <?php echo $fetch['prod_name']; ?> </td>
         <td> <?php echo $fetch['sup_name']; ?></td>
@@ -61,7 +77,16 @@ var_dump($fetch)
     </tbody>
      <?php endforeach; ?>
   </table>
-
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 
   
 </body>
