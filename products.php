@@ -13,7 +13,7 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Update Creditors | jirani supermarket</title>
+  <title>Purchases | jiarni supermarket</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -32,37 +32,34 @@ else{
     <div class="col-sm-12">
       <div class="main-content">
         <div class="header1">
-          <h3 style="text-align: center;"><strong>Update Creditor</strong></h3>
+          <h3 style="text-align: center;"><strong>Add All Products</strong></h3>
         </div><!--end of title-->
         <div class="1-part">
           <form method="post" action="" style="align-self: center;">
-             <label>Enter Creditors Name:</label>
+             <label>Enter Product Name:</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-pencil "></i></span>
-              <input type="text" class="form-control" placeholder="Enter Creditors Name" name="cred_name" required="required" ><br>
+              <input type="text" class="form-control" placeholder="Enter Product Name" name="product_name" required="required" ><br>
             </div>
-             <label>Enter Product purchased :</label>
+            <label>Enter Quantity:</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-pencil "></i></span>
-             <textarea rows="4" cols="50" placeholder="Enter products purchased" name="prod_pur" class="form-control">
-            
-            </textarea>            
-             </div>
-             <label>Enter total cost:</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil "></i></span>
-              <input id="email" type="text" class="form-control" placeholder="Enter total cost " name="total" required="required" ><br>
+              <input id="email" type="text" class="form-control" placeholder="Enter Quantity" name="quantity" required="required" ><br>
             </div>
-            
-            <label>Enter Contact:</label>
+            <label>Enter Selling Price:</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-pencil "></i></span>
-              <input id='password' type="tel" class="form-control" placeholder="Enter telphone no" name="contact" required="required" ><br>
+              <input id='password' type="text" class="form-control" placeholder="price" name="price" required="required" ><br>
+            </div>
+            <label>Enter Category:</label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil "></i></span>
+              <input id='password' type="text" class="form-control" placeholder="Enter category" name="category" required="required" ><br>
 
             </div>
             <br><br>
-                 <center><button id="signup" class="btn btn-success btn-lg" name="ok">Add Creditor</button></center>
-          
+                 <center><button id="signup" class="btn btn-success btn-lg" name="ok">Enter Products</button></center>
+              <h4 style="color: rgba(2,190,34,1);"></h4>
           </form>
 <div class="footer" id="end">
     <h6>Jirani supermarket limited | All rights reserved &copy 2019</h6>
@@ -78,43 +75,52 @@ if (empty($_POST)) {
   exit();
 }
 //create variables
-$cred_name = $_POST['cred_name'];
-$prod_pur = $_POST['prod_pur'];
-$total= $_POST['total'];
-$contact = $_POST['contact'];
-
-$date = date('Y/m/d h:m:s');
+$product_name = $_POST['product_name'];
+$quantity= $_POST['quantity'];
+$price = $_POST['price'];
+$category = $_POST['category'];
 
 //validate date if correct
-if (empty($cred_name)) {
-  echo "<h6 style:'color:red;'>Creditor's name is Empty</h6>";
+if (empty($product_name)) {
+  echo "<h6 style:'color:red;'>Product name is Empty</h6>";
   exit();
 }
-if (empty($prod_pur)) {
-  echo "<h6 style:'color:red;'>Product supplied is Empty</h6>";
-  exit();
-}
-if (empty($total)) {
-  echo "<h6 style:'color:red; align-self:center;'>Total Cost is Empty</h6>";
-  exit();
-}
-if (empty($contact)) {
-  echo "<h6 style:'color:red;'>Contact is Empty</h6>";
+if (empty($quantity)) {
+  echo "<h6 style:'color:red; align-self:center;'>Quantity is Empty</h6>";
   exit();
 }
 
- 
+if (empty($price)) {
+  echo "<h6 style:'color:red;'>Selling Price is Empty</h6>";
+  exit();
+}
+if (empty($category)) {
+  echo "<h6 style:'color:red;'>Category is Empty</h6>";
+  exit();
+}
+
+   ini_set('display_errors',1);
+error_reporting(E_ALL);
+
+/*** THIS! ***/
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+/*** ^^^^^ ***/
+
 //database connection
  $conn = mysqli_connect("localhost","root","","jirani_db");
+   if (mysqli_connect_errno()) {
+      echo "error occured" .mysqli_connect();
+   }
 
 //insert to t--able users
-   $query = "UPDATE creditors SET prod_pur='$prod_pur', total='$total',contact='$contact', date='$date' WHERE cred_name={$cred_name} ";
+ $res = mysqli_query($conn, "INSERT INTO products(product_name,quantity,price,category) VALUES('$product_name','$quantity','$price','$category')");
+
 if ($res==true) {
-  echo "<h4 style:'color:green;'> Successfully updated</h4>";
-  //header('location: home.php');
+  
+  echo "<h4>Successful Added</h4>";
 }
 else{
   echo "error";
 }
-  
+
 ?>

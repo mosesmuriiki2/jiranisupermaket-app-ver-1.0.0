@@ -89,6 +89,23 @@ else{
     <p>View debtors <a href="view_debtors.php">view</a></p> 
   </div>
 </div>
+</section>
+<section class="row">
+<div class="card col-md-6">
+  <img src="images/supermarket5.jpeg" alt="Avatar" style="width:100%">
+  <div class="container">
+    <h4><b>Products</b></h4> 
+    <p>View products <a href="view_products.php">view</a></p> 
+  </div>
+</div>
+<div class="card col-md-6">
+  <img src="images/supermarket5.jpeg" alt="Avatar" style="width:100%">
+  <div class="container">
+    <h4><b>Coming soon</b></h4> 
+    <p>View products <a href="view_products.php"></a></p> 
+  </div>
+</div>
+
 
 </section>
   <div class="panel panel-default" style="margin-top: 30px; width: 82%;">

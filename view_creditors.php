@@ -18,8 +18,8 @@ else{
  $query = 'SELECT * FROM creditors';
  
  $result = mysqli_query($conn, $query);
-
- $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
+//using foreach loop
+ //$fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
   //  var_dump($fetch);
 
 
@@ -39,8 +39,7 @@ else{
      <h3 style="color: green;"><center> Logined as <?php echo $email ?></center></h3>
   <center><h3 style="color: green;"><?php echo "Time Logined" .  date('Y/m/d h:m:s'); ?></h3></center>
      <div class="container">
-       <center><button class="btn btn-large btn btn-warning" style="width: 30%;"><a href=" delete_creditor.php ">Delete</a></button></center>
-       <center><button class="btn btn-large btn btn-warning" style="width: 30%;"><a href=" update_creditor.php ">Update</a></button></center>
+     
       <h2>Search Creditors</h2>
   <p>Type something in the input field to search the table for first names, last names or phone number:</p>  
   <input class="form-control" id="myInput" type="text" placeholder="Search..">
@@ -50,24 +49,46 @@ else{
      	<table border="1" class="table" id="">
      		<thead>
      			<tr>
+            <th>Creditors Id</th>
      				<th>Creditors Name</th>
      				<th>Product purchased</th>
      				<th>Total Amount</th>
      				<th>Contact</th>
      				<th>Date</th>
+            
+            <th>Dpadate</th>
+            <th>Delete</th>
+
      			</tr>
      		</thead>
-     		<?php foreach($fetch as $fetch): ?>
+     		<!--<?php //foreach($fetch as $fetch): ?>-->
+        <?php
+                     while ($row=mysqli_fetch_assoc($result)) {
+                      $cred_id= $row['cred_id'];
+                      $cred_name= $row['cred_name'];
+                      $prod_pur= $row['prod_pur'];
+                      $total = $row['total'];
+                      $contact = $row['contact'];
+                      $date = $row['date1'];
+                     
+
+            ?>
      		<tbody id="myTable">
      			<tr>
-     				<td><?php echo $fetch['cred_name']; ?> </td>
-     				<td> <?php echo $fetch['prod_pur']; ?> </td>
-     				<td> <?php echo $fetch['total']; ?> </td>
-     				<td> <?php echo $fetch['contact']; ?>  </td>
-     				<td> <?php echo $fetch['date']; ?> </td>
+            <td><?php echo $row['cred_id']; ?></td>
+     				<td><?php echo $row['cred_name']; ?> </td>
+     				<td> <?php echo $row['prod_pur']; ?> </td>
+     				<td> <?php echo $row['total']; ?> </td>
+     				<td> <?php echo $row['contact']; ?>  </td>
+     				<td> <?php echo $row['date1']; ?> </td>
+            <td><a href="edit_creditor.php?GetID=<?php echo $cred_id  ?>" class="btn btn-lg">edit</a></td><td><a href="delete_creditor.php?del=<?php echo $cred_id  ?>" class="btn btn-lg btn-warning" onclick="return confirm('Are you sure you want to delete this record?');">delete</a></td>
+
      			</tr>
      		</tbody>
-     	<?php endforeach; ?>
+     	<?php
+
+           }
+       ?>
      	</table>
      </div>
      </div>

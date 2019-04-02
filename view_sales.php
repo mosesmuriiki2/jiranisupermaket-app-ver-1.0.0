@@ -13,8 +13,7 @@ $conn = mysqli_connect('localhost','root','','jirani_db');
  if (mysqli_connect_errno()) {
  	echo "Error occured". mysqli_connect_errno();
  }
-
- $query = 'SELECT * FROM sales';
+   $query = 'SELECT * FROM sales';
   
   $result= mysqli_query($conn, $query);
    $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -40,35 +39,29 @@ $conn = mysqli_connect('localhost','root','','jirani_db');
     <input type="text" name="" class="form-control" id="myInput" placeholder="Search...">
    	<h1 style="text-align: center;">All Sales</h1>
    	<div class="table-responsive">
-   		<table class="table" border="1" cellspacing="1" style="border-radius: unset;">
+   		<table class="table" border="1" cellspacing="1" style="border-radius: unset;" id="table">
    			<thead>
    				<tr>
    					<th>Total money collected in Notes</th>
    					<th>Total money collected in Coins</th>
    					<th>Created Date</th>
+            <th>Total</th>
    				</tr>
    			</thead>
    			<?php foreach($fetch as $fetch): ?>
-   			<tbody id="myTable">
+   			<tbody>
    				<tr>
-   					<td><?php echo $fetch['notes']; ?></td>
-   					<td> <?php echo $fetch['coins']; ?> </td>
-   					<td> <?php echo $fetch['date']; ?> </td>
+   					<td  ><?php echo $fetch['notes']; ?></td>
+   					<td >  <?php echo $fetch['coins']; ?> </td>
+   					<td  > <?php echo $fetch['date']; ?> </td>
+            <td>     <span id="val"></span></td>
    				</tr>
-   			</tbody>
+
    		<?php endforeach; ?>
    		</table>
+
+
    	</div>
    </div>
-   <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
  </body>
  </html>

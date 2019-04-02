@@ -32,10 +32,11 @@ else{
     <div class="col-sm-12">
       <div class="main-content">
         <div class="header1">
-          <h3 style="text-align: center;"><strong>Add Purchases</strong></h3>
+          <h3 style="text-align: center;"><strong>Add Creditors</strong></h3>
         </div><!--end of title-->
         <div class="1-part">
           <form method="post" action="" style="align-self: center;">
+            <input type="hidden" name="cred_id">
              <label>Enter Creditors Name:</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-pencil "></i></span>
@@ -83,7 +84,7 @@ $prod_pur = $_POST['prod_pur'];
 $total= $_POST['total'];
 $contact = $_POST['contact'];
 
-$date = date('Y/m/d h:m:s');
+$date1 = date('Y/m/d h:m:s');
 
 //validate date if correct
 if (empty($cred_name)) {
@@ -103,16 +104,24 @@ if (empty($contact)) {
   exit();
 }
 
- 
+  ini_set('display_errors',1);
+error_reporting(E_ALL);
+
+/*** THIS! ***/
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+/*** ^^^^^ ***/
+
 //database connection
  $conn = mysqli_connect("localhost","root","","jirani_db");
-
+   if (mysqli_connect_errno()) {
+      echo "error occured" .mysqli_connect();
+   }
 //insert to t--able users
- $res = mysqli_query($conn, "INSERT INTO creditors VALUES('$cred_name','$prod_pur','$total','$contact','$date')");
+ $res = mysqli_query($conn, "INSERT INTO creditors (cred_name,prod_pur,total,contact,date1) VALUES('$cred_name','$prod_pur','$total','$contact','$date1')");
 
 if ($res==true) {
   echo "<h4 style:'color:green;'> Successfully registred</h4>";
-  header('location: home.php');
+  header('location: view_creditors.php');
 }
 else{
   echo "error";

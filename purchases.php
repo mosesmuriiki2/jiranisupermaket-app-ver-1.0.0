@@ -92,7 +92,7 @@ $amount = $_POST['amount'];
 $sell_price = $_POST['sell_price'];
 $contact = $_POST['contact'];
 
-$date = date('Y/m/d h:m:s');
+$date1 = date('Y/m/d h:m:s');
 
 //validate date if correct
 if (empty($prod_name)) {
@@ -121,16 +121,25 @@ if (empty($contact)) {
   exit();
 }
 
- 
+   ini_set('display_errors',1);
+error_reporting(E_ALL);
+
+/*** THIS! ***/
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+/*** ^^^^^ ***/
+
 //database connection
  $conn = mysqli_connect("localhost","root","","jirani_db");
+   if (mysqli_connect_errno()) {
+      echo "error occured" .mysqli_connect();
+   }
 
 //insert to t--able users
- $res = mysqli_query($conn, "INSERT INTO purchases VALUES('$prod_name','$sup_name','$quan_name','$amount','$sell_price','$contact','$date')");
+ $res = mysqli_query($conn, "INSERT INTO purchases (prod_name,sup_name,quan_name,amount,sell_price,contact,date1) VALUES('$prod_name','$sup_name','$quan_name','$amount','$sell_price','$contact','$date1')");
 
 if ($res==true) {
   echo "<h4 style:'color:green;'> Successfully registred</h4>";
-  header('location: home.php');
+  header('location: viewpurchases.php');
 }
 else{
   echo "error";

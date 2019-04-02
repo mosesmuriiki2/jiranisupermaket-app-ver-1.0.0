@@ -48,8 +48,8 @@ $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
    
       <div class="container">
   <h2>Bordered Table</h2>
-  <p>The .table-bordered class adds borders to a table:</p>            
-  <table class="table table-bordered">
+  <p></p>            
+  <table class="table table-bordered" border="1" bgcolor="green" width="100%">
     
     <thead>
       <tr>
@@ -71,7 +71,7 @@ $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <td> <?php echo $fetch['amount']; ?> </td>
         <td> <?php echo $fetch['sell_price']; ?> </td>
         <td> <?php echo $fetch['contact']; ?> </td>
-        <td> <?php echo $fetch['date']; ?> </td>
+        <td> <?php echo $fetch['date1']; ?> </td>
       </tr>
   
     </tbody>

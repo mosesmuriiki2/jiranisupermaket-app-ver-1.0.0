@@ -92,7 +92,7 @@ $email = $_POST['email'];
 $tel_num = $_POST['tel_num'];
 $pay_period = $_POST['pay_period'];
 
-$date = date('Y/m/d h:m:s');
+$date1 = date('Y/m/d h:m:s');
 
 //validate date if correct
 if (empty($deb_name)) {
@@ -121,16 +121,26 @@ if (empty($pay_period)) {
   exit();
 }
 
- 
+  ini_set('display_errors',1);
+error_reporting(E_ALL);
+
+/*** THIS! ***/
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+/*** ^^^^^ ***/
+
 //database connection
  $conn = mysqli_connect("localhost","root","","jirani_db");
+ if (mysqli_connect_errno()) {
+  echo "Error occured". mysqli_connect_errno();
+ }
+
 
 //insert to t--able users
- $res = mysqli_query($conn, "INSERT INTO debtors VALUES('$deb_name','$prod_sup','$amount','$email','$tel_num','$pay_period','$date')");
+ $res = mysqli_query($conn, "INSERT INTO debtors (deb_name,prod_sup,amount,email,tel_num,pay_period,date1) VALUES('$deb_name','$prod_sup','$amount','$email','$tel_num','$pay_period','$date1')");
 
 if ($res==true) {
   echo "<h4 style:'color:green;'> Successfully registred</h4>";
-  header('location: login.php');
+  header('location: view_debtors.php');
 }
 else{
   echo "error";

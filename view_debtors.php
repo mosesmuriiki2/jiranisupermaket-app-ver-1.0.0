@@ -1,5 +1,4 @@
 <?php
- 
  session_start();
 if (!isset($_SESSION['x'])) {
   echo "ACCESS DENIED PLEASE LOGIN ....";
@@ -19,7 +18,7 @@ else{
  
  $result = mysqli_query($conn, $query);
 
- $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
+// $fetch = mysqli_fetch_all($result, MYSQLI_ASSOC);
   //var_dump($fetch);
 
 
@@ -37,10 +36,10 @@ else{
   </head>
   <body>
      <h3 style="color: green;"><center> Logined as <?php echo $email ?></center></h3>
-  <center><h3 style="color: green;"><?php echo "Time Logined" .  date('Y/m/d h:m:s'); ?></h3></cente
+  <center><h3 style="color: green;"><?php echo "Time Logined" .  date('Y/m/d h:m:s'); ?></h3></center>
      <div class="container">
       
-         <center><button class="btn btn-large btn btn-warning" style="width: 30%;"><a href=" delete_debtor.php ">Delete</a></button></center>
+      
          <h2>Search Debtors from the table</h2>
       <input type="text" name="" class="form-control" id="myInput" placeholder="Search..">
 
@@ -50,6 +49,7 @@ else{
      	<table border="1" class="table" >
      		<thead>
      			<tr>
+            <th>Debtors Id</th>
      				<th>Debtors Name</th>
      				<th>Product supplied</th>
      				<th>Amount to be paid</th>
@@ -57,23 +57,42 @@ else{
      				<th>Telphone Number</th>
             <th>Agreed period of payment</th>
             <th>Date Created</th>
+            <th>Update</th>
             <th>Action</th>
      			</tr>
      		</thead>
-     		<?php foreach($fetch as $fetch): ?>
+     		 <?php
+                     while ($row=mysqli_fetch_assoc($result)) {
+                      $deb_id= $row['deb_id'];
+                      $deb_name= $row['deb_name'];
+                      $prod_sup= $row['prod_sup'];
+                      $amount = $row['amount'];
+                      $email = $row['email'];
+                      $tel_num = $row['tel_num'];
+                      $pay_period = $row['pay_period'];
+                      $date1 = $row['date1'];
+
+                     
+
+            ?>
      		<tbody id="myTable">
      			<tr>
-     				<td><?php echo $fetch['deb_name']; ?> </td>
-     				<td> <?php echo $fetch['prod_sup']; ?> </td>
-     				<td> <?php echo $fetch['amount']; ?> </td>
-     				<td> <?php echo $fetch['email']; ?>  </td>
-     				<td> <?php echo $fetch['tel_num']; ?> </td>
-            <td> <?php echo $fetch['pay_period']; ?> </td>
-            <td> <?php echo $fetch['date']; ?> </td>
-            <td><button class="btn btn-small btn btn-warning"><a href=" delete_debtor.php ">Delete</a></button></td>
+            <td><?php echo $row['deb_id']; ?> </td>
+     				<td><?php echo $row['deb_name']; ?> </td>
+     				<td> <?php echo $row['prod_sup']; ?> </td>
+     				<td> <?php echo $row['amount']; ?> </td>
+     				<td> <?php echo $row['email']; ?>  </td>
+     				<td> <?php echo $row['tel_num']; ?> </td>
+            <td> <?php echo $row['pay_period']; ?> </td>
+            <td> <?php echo $row['date1']; ?> </td>
+            <td><a href="edit.debtor.php?GetID=<?php echo $deb_id  ?>" class="btn btn-lg">edit</a></td>
+            <td><a href="delete_debtor.php?del=<?php echo $deb_id  ?>" class="btn btn-lg btn-warning" onclick="return confirm('Are you sure you want to delete this record?');">delete</a></td>
+
      			</tr>
      		</tbody>
-     	<?php endforeach; ?>
+     	<?php 
+}
+       ?>
      	</table>
      </div>
      </div>

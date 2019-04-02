@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 if (!isset($_SESSION['x'])) {
   echo "ACCESS DENIED PLEASE LOGIN ....";
@@ -69,7 +69,7 @@ $notes = $_POST['notes'];
 $coins = $_POST['coins'];
 //$total = $_POST['notes,coins;'];
 
-$date = date('Y/m/d h:m:s');
+$date1 = date('Y/m/d h:m:s');
 
 //validate date if correct
 if (empty($notes)) {
@@ -81,18 +81,23 @@ if (empty($coins)) {
   exit();
 }
 
- 
- $conn = mysqli_connect("localhost","root","","jirani_db");
 
-//insert to t--able users
- $res = mysqli_query($conn, "INSERT INTO sales VALUES('$notes','$coins','$date')");
+$conn = mysqli_connect ("localhost","root","","jirani_db");
+ if (mysqli_connect_errno()) {
+  echo "Error occured". mysqli_connect_errno();
+ }
+//connect to database
+
+
+$res = mysqli_query($conn, "INSERT INTO sales (notes,coins, date1) VALUES('$notes','$coins','$date1')");
 
 if ($res==true) {
-  echo "<h4 style:'color:green;'> Successfully registred</h4>";
-  header('location: login.php');
+  echo "Thank you. notes entered $notes  coins entered $coins  added";
+  
 }
-else{
-  echo "error";
+
+else {
+  echo "Error Retry";
 }
 
 ?>
