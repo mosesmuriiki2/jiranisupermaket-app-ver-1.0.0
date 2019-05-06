@@ -34,6 +34,9 @@ else{
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    
+  </style>
   </head>
   <body>
      <h3 style="color: green;"><center> Logined as <?php echo $email ?></center></h3>
@@ -52,7 +55,7 @@ else{
             <th>Product ID</th>
             <th>Product Name</th>
             <th>Quantity</th>
-            <th>Price</th>
+            <th>Price (KSH)</th>
             <th>Category</th>
             <th>Date registered</th>
             <th>Update</th>

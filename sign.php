@@ -82,7 +82,7 @@ $pass = $_POST['pass'];
 $confirm = $_POST['confirm'];
 $gender = $_POST['gender'];
 
-$date = date('Y/m/d h:m:s');
+$date1 = date('Y/m/d h:m:s');
 
 //validate date if correct
 if (empty($f_name)) {
@@ -126,7 +126,7 @@ $salt = '$2a$07$R.gjb2U2N.FmZ4hPp1y2CN$';
  $conn = mysqli_connect("localhost","root","","jirani_db");
 
 //insert to t--able users
- $res = mysqli_query($conn, "INSERT INTO users VALUES('$f_name','$l_name','$email','$newpass','$gender','$date')");
+ $res = mysqli_query($conn, "INSERT INTO users (f_name,l_name,email,newpass,gender,date1) VALUES('$f_name','$l_name','$email','$newpass','$gender','$date1')");
 
 if ($res==true) {
   echo "<h4 style:'color:green;'> Successfully registred</h4>";
